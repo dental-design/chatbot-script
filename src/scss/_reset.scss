@@ -1,0 +1,47 @@
+.chatbot *,
+.chatbot::after,
+.chatbot::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.chatbot {
+
+  a, 
+  area, 
+  button, 
+  [role=button], 
+  input:not([type=range]), 
+  label, 
+  select, 
+  summary, 
+  textarea {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+  }
+
+  *:focus {
+    outline: none;
+    outline: 0;
+    outline: -webkit-focus-ring-color 0;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline: 1px solid var(--chat-one) !important;
+    text-decoration: none !important;
+    outline-offset: 1px !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: .01ms!important;
+    animation-iteration-count: 1!important;
+    transition-duration: .01ms!important;
+    scroll-behavior: auto!important;
+  }
+
+}

@@ -1,0 +1,196 @@
+/*-----------------------------------------------------------------------------------*/
+/* LOAD THE CHATBOT BUTTON & DIALOG */
+/*-----------------------------------------------------------------------------------*/
+
+const loadChatBot = function () {
+
+  const addDialog = document.createElement("div");
+  addDialog.id = ('chatBot');
+  addDialog.innerHTML = "{{load path='./src/html/dialog.html'}}"; //injected with gulp
+  addDialog.className = ('chatbot');
+  addDialog.setAttribute('data-active', false);
+  document.body.prepend(addDialog);
+
+}
+
+loadChatBot();
+
+
+/*-----------------------------------------------------------------------------------*/
+/* SET THE CHATBOT OPTIONS */
+/*-----------------------------------------------------------------------------------*/
+
+let setChatBot;
+let timeout = 100;
+
+setChatBot = function (id) {
+
+  setTimeout(function () {
+    timeout--;
+    if ( typeof loadChatBot !== 'undefined' ) {
+
+      const chatToggle   =   document.querySelector('#chatToggle');
+      const chatDialog   =   document.querySelector('#chatDialog');
+      
+      const chatParent   =   chatDialog.parentElement;
+      const chatTxt      =   chatToggle.querySelector('.chatbot__txt');
+      const chatEmbed    =   chatDialog.querySelector('iframe');
+
+      const showChat     =   sessionStorage.getItem('chatActive');
+
+
+      /*-----------------------------------------------------------------------------------*/
+      /* OPEN/CLOSE FUNCTIONS */
+      /*-----------------------------------------------------------------------------------*/
+
+      function openChatSession() {
+
+        sessionStorage.setItem('chatActive', 'true');
+
+        chatDialog.classList.remove('chatbot__dialog--closed');
+        chatDialog.classList.add('chatbot__dialog--open');
+        chatDialog.setAttribute('aria-hidden', false);
+
+        chatToggle.classList.remove('chatbot__btn--closed');
+        chatToggle.classList.add('chatbot__btn--open');
+        chatToggle.setAttribute('aria-expanded', true);
+
+        chatTxt.innerHTML = "Close chat";
+
+      }
+
+      function closeChatSession() {
+
+        sessionStorage.setItem('chatActive', 'false');
+
+        chatDialog.classList.remove('chatbot__dialog--open');
+        chatDialog.classList.add('chatbot__dialog--closed');
+        chatDialog.setAttribute('aria-hidden', true);
+        
+        chatToggle.classList.remove('chatbot__btn--open');
+        chatToggle.classList.add('chatbot__btn--closed');
+        chatToggle.setAttribute('aria-expanded', false);
+
+        chatTxt.innerHTML="Open chat";
+
+      }
+
+
+      /*-----------------------------------------------------------------------------------*/
+      /* CHECK LOCTION OF CHATBOT */
+      /*-----------------------------------------------------------------------------------*/
+
+      if( id.chatbot_location == 'right') {
+        chatParent.classList.add('chatbot--right');
+      } else {
+        chatParent.classList.add('chatbot--left');
+      }
+
+
+      /*-----------------------------------------------------------------------------------*/
+      /* CHECK LOCTION OF CHATBOT */
+      /*-----------------------------------------------------------------------------------*/
+
+      if( id.chatbot_id ){
+
+        const chatBase     =   "https://interfaces.zapier.com/embed/chatbot/";
+        const chatUrl      =   chatBase + id.chatbot_id;
+
+        /*-----------------------------------------------------------------------------------*/
+        /* CLICK EVENTS */
+        /*-----------------------------------------------------------------------------------*/
+
+        chatToggle.addEventListener("click", function() {
+
+          if (chatDialog.classList.contains('chatbot__dialog--open')) {
+
+            closeChatSession();
+
+            /* --------------------- GOOGLE TAG MANAGER CUSTOM EVENT TRIGGER (https://www.analyticsmania.com/post/google-tag-manager-custom-event-trigger/) --------------------- */
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              'event': 'chatbotClosed'
+            });
+      
+          } else {
+
+            chatEmbed.setAttribute('src', chatUrl);
+
+            openChatSession();
+
+            /* --------------------- GOOGLE TAG MANAGER CUSTOM EVENT TRIGGER (https://www.analyticsmania.com/post/google-tag-manager-custom-event-trigger/) --------------------- */
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              'event': 'chatbotOpened'
+            });
+      
+          }
+      
+        });
+
+
+        /*-----------------------------------------------------------------------------------*/
+        /* SHOW CHATBOT */
+        /*-----------------------------------------------------------------------------------*/
+
+        setTimeout(() => {
+
+          chatParent.setAttribute('data-active', true);
+
+          /*-----------------------------------------------------------------------------------*/
+          /* SHOW ONLOAD */
+          /*-----------------------------------------------------------------------------------*/
+
+          if( id.chatbot_onload == true ){
+
+            console.log('Show onload');
+                  
+            if (!showChat || showChat == 'true') {
+              
+              chatEmbed.setAttribute('src', chatUrl);
+
+              openChatSession() 
+
+            }
+
+            if (showChat == 'false') {
+              chatTxt.innerHTML="Open chat";
+            }
+
+          } else {
+
+            /*-----------------------------------------------------------------------------------*/
+            /* DON'T SHOW ONLOAD */
+            /*-----------------------------------------------------------------------------------*/
+
+            console.log('Hide onload');
+
+            if (showChat == 'true') {
+              
+              chatEmbed.setAttribute('src', chatUrl);
+
+              openChatSession() 
+
+            }
+
+            if (showChat == 'false') {
+              chatTxt.innerHTML="Open chat";
+            }
+          
+          }
+
+        }, 1000);
+
+      }
+
+    } else if (timeout > 0) {
+      setChatBot();
+    } else {
+      console.log('No chatEmbed Script Loaded')
+    }
+
+  }, 100);
+
+}
