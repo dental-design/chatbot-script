@@ -167,18 +167,57 @@ setChatBot = function (id) {
 
 
         /*-----------------------------------------------------------------------------------*/
-        /* SHOW CHATBOT */
+        /* CHATBOT VISIBILITY */
         /*-----------------------------------------------------------------------------------*/
 
         setTimeout(() => {
 
-          chatParent.setAttribute('data-chatbot', true);
+          /*-----------------------------------------------------------------------------------*/
+          /* CHECK IF CHATBOT NEEDS TO SHOW BETWEEN A TIME FRAME */
+          /*-----------------------------------------------------------------------------------*/
+
+          function scheduleChat(time) {
+
+            const startParts = time.start.split(':');
+            const endParts = time.end.split(':');
+        
+            const startHour = parseInt(startParts[0]);
+            const startMinute = parseInt(startParts[1]);
+        
+            const endHour = parseInt(endParts[0]);
+            const endMinute = parseInt(endParts[1]); 
+        
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+        
+            return (hours === startHour && minutes >= startMinute) || (hours > startHour && hours < endHour) || (hours === endHour && minutes <= endMinute);
+
+          }
+
+          if (id.chatbot_start) {
+
+            if (scheduleChat({ start: id.chatbot_start, end: id.chatbot_end })) {
+
+              chatParent.setAttribute('data-chatbot', true);
+    
+            } else {
+    
+              chatParent.setAttribute('data-chatbot', false);
+    
+            }
+
+          } else {
+    
+            chatParent.setAttribute('data-chatbot', true);
+  
+          }
 
           /*-----------------------------------------------------------------------------------*/
           /* SHOW ONLOAD */
           /*-----------------------------------------------------------------------------------*/
 
-          if( id.chatbot_onload == true ){
+          if( id.chatbot_onload === true ){
           
             if (!showChat || showChat == 'true') {
               
@@ -238,7 +277,7 @@ setChatBot = function (id) {
           
           }
 
-        }, 1000);
+        }, 1000)
 
       }
 
