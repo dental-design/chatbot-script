@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="robots" content="noindex" />
-    <title>Cookie Consent - Static Implementation</title>
+    <title>Chatbot - Static Implementation</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,22 +22,22 @@
 
     <!-- STYLESHEET - REMEMBER TO USE CDN VERSION TO TEST LIVE -->
     
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dental-design/cookie-consent@latest/cookie-styles.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dental-design/chatbot-script@latest/chatbot-styles.css"> -->
     <link rel="stylesheet" href="/dist/chatbot-styles.css">
 
     
     <!-- STYLESHEET - REMEMBER TO USE CDN VERSION TO TEST LIVE -->
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dental-design/cookie-consent@latest/cookie-script.js" defer></script> -->
-    <script type="text/javascript" src="/dist/chatbot-script.js" defer></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dental-design/chatbot-script@latest/chatbot-script.js" async ></script> -->
+    <script type="text/javascript" src="/dist/chatbot-script.js" async ></script>
 
-    <script type="text/javascript" defer>
+    <script type="text/javascript" async >
 
       window.addEventListener('load', function () {
         setChatBot({
-          chatbot_id: "cm1asf87f001o4ddon0xgm8kd", // Needed to load chatbot
+          chatbot_id: 'cm1asf87f001o4ddon0xgm8kd', // Zapier chatbot-id (taken from embed script chatbot-id or iframe url)
           chatbot_location: 'right', // Moves chatbot to the bottom left or right of window
-          chatbot_onload: true, // Load chatbot on page first page load
+          chatbot_onload: false, // Load chatbot on page first page load
         });
       });
 

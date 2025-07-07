@@ -43,9 +43,7 @@ setChatBot = function (id) {
       /* OPEN/CLOSE FUNCTIONS */
       /*-----------------------------------------------------------------------------------*/
 
-      function openChatSession() {
-
-        sessionStorage.setItem('chatActive', 'true');
+      function openChat() {
 
         chatDialog.classList.remove('chatbot__dialog--closed');
         chatDialog.classList.add('chatbot__dialog--open');
@@ -55,13 +53,26 @@ setChatBot = function (id) {
         chatToggle.classList.add('chatbot__btn--open');
         chatToggle.setAttribute('aria-expanded', true);
 
+      }
+
+      function openChatSession() {
+
+        sessionStorage.setItem('chatActive', 'true');
+        
+        chatEmbed.setAttribute('src', chatUrl);
         chatTxt.innerHTML = "Close chat";
+
+        chatDialog.classList.remove('chatbot__dialog--closed');
+        chatDialog.classList.add('chatbot__dialog--open');
+        chatDialog.setAttribute('aria-hidden', false);
+
+        chatToggle.classList.remove('chatbot__btn--closed');
+        chatToggle.classList.add('chatbot__btn--open');
+        chatToggle.setAttribute('aria-expanded', true);
 
       }
 
-      function closeChatSession() {
-
-        sessionStorage.setItem('chatActive', 'false');
+      function closeChat() {
 
         chatDialog.classList.remove('chatbot__dialog--open');
         chatDialog.classList.add('chatbot__dialog--closed');
@@ -71,7 +82,21 @@ setChatBot = function (id) {
         chatToggle.classList.add('chatbot__btn--closed');
         chatToggle.setAttribute('aria-expanded', false);
 
-        chatTxt.innerHTML="Open chat";
+      }
+
+      function closeChatSession() {
+
+        sessionStorage.setItem('chatActive', 'false');
+
+        chatTxt.innerHTML = "Open chat";
+
+        chatDialog.classList.remove('chatbot__dialog--open');
+        chatDialog.classList.add('chatbot__dialog--closed');
+        chatDialog.setAttribute('aria-hidden', true);
+        
+        chatToggle.classList.remove('chatbot__btn--open');
+        chatToggle.classList.add('chatbot__btn--closed');
+        chatToggle.setAttribute('aria-expanded', false);
 
       }
 
@@ -96,6 +121,7 @@ setChatBot = function (id) {
         const chatBase     =   "https://interfaces.zapier.com/embed/chatbot/";
         const chatUrl      =   chatBase + id.chatbot_id;
 
+
         /*-----------------------------------------------------------------------------------*/
         /* CLICK EVENTS */
         /*-----------------------------------------------------------------------------------*/
@@ -104,7 +130,12 @@ setChatBot = function (id) {
 
           if (chatDialog.classList.contains('chatbot__dialog--open')) {
 
-            closeChatSession();
+            sessionStorage.setItem('chatActive', 'false');
+
+            chatTxt.innerHTML = "Open chat";
+
+            closeChat();
+
 
             /* --------------------- GOOGLE TAG MANAGER CUSTOM EVENT TRIGGER (https://www.analyticsmania.com/post/google-tag-manager-custom-event-trigger/) --------------------- */
 
@@ -117,7 +148,11 @@ setChatBot = function (id) {
 
             chatEmbed.setAttribute('src', chatUrl);
 
-            openChatSession();
+            sessionStorage.setItem('chatActive', 'true');
+
+            chatTxt.innerHTML = "Close chat";
+
+            openChat();
 
             /* --------------------- GOOGLE TAG MANAGER CUSTOM EVENT TRIGGER (https://www.analyticsmania.com/post/google-tag-manager-custom-event-trigger/) --------------------- */
 
@@ -144,19 +179,27 @@ setChatBot = function (id) {
           /*-----------------------------------------------------------------------------------*/
 
           if( id.chatbot_onload == true ){
-
-            console.log('Show onload');
-                  
+          
             if (!showChat || showChat == 'true') {
               
               chatEmbed.setAttribute('src', chatUrl);
 
-              openChatSession() 
+              sessionStorage.setItem('chatActive', 'true');
+
+              chatTxt.innerHTML = "Close chat";
+
+              openChat(); 
 
             }
 
             if (showChat == 'false') {
+
+              sessionStorage.setItem('chatActive', 'false');
+
               chatTxt.innerHTML="Open chat";
+
+              closeChat();
+
             }
 
           } else {
@@ -165,18 +208,32 @@ setChatBot = function (id) {
             /* DON'T SHOW ONLOAD */
             /*-----------------------------------------------------------------------------------*/
 
-            console.log('Hide onload');
+            if (!showChat) {
+              
+              closeChat();
+
+            }
 
             if (showChat == 'true') {
               
               chatEmbed.setAttribute('src', chatUrl);
 
-              openChatSession() 
+              sessionStorage.setItem('chatActive', 'true');
+
+              chatTxt.innerHTML = "Close chat";
+
+              openChat(); 
 
             }
 
             if (showChat == 'false') {
+
+              sessionStorage.setItem('chatActive', 'false');
+              
               chatTxt.innerHTML="Open chat";
+
+              closeChat();
+
             }
           
           }
