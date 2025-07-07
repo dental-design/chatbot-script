@@ -8,7 +8,7 @@ const loadChatBot = function () {
   addDialog.id = ('chatBot');
   addDialog.innerHTML = "{{load path='./src/html/dialog.html'}}"; //injected with gulp
   addDialog.className = ('chatbot');
-  addDialog.setAttribute('data-active', false);
+  addDialog.setAttribute('data-chatbot', false);
   document.body.prepend(addDialog);
 
 }
@@ -113,7 +113,7 @@ setChatBot = function (id) {
 
 
       /*-----------------------------------------------------------------------------------*/
-      /* CHECK LOCTION OF CHATBOT */
+      /* GET THE ZAPIER EMBEDCODE */
       /*-----------------------------------------------------------------------------------*/
 
       if( id.chatbot_id ){
@@ -172,7 +172,7 @@ setChatBot = function (id) {
 
         setTimeout(() => {
 
-          chatParent.setAttribute('data-active', true);
+          chatParent.setAttribute('data-chatbot', true);
 
           /*-----------------------------------------------------------------------------------*/
           /* SHOW ONLOAD */
