@@ -166,6 +166,8 @@
   &__dialog {
     position: absolute;
     bottom: 80px;
+    display: grid;
+    grid-template-rows: 1fr auto;
     width: calc(100vw - 40px);
     background: #f3f6fc;
     border: 0;
@@ -203,6 +205,27 @@
       height: 0;
       max-width: 0;
       animation: chatClose 0.25s ease-out;
+    }
+
+  }
+
+  &__powered {
+    display: block;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 1.2;
+    padding: 0 20px 15px;
+    color: #303030;
+    background: #eff4fe;
+
+    a {
+      color: #303030;
+      text-decoration: underline;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: none;
     }
 
   }
