@@ -1,7 +1,13 @@
 $media-min: 768px;
 
 :root {
-  --chat-one: #222222;
-  --chat-two: #888888;
-  --chat-txt: #ffffff;
+  --chat-txt: #222222;
+  --chat-icon: #888888;
+  --chat-color: #ffffff;
+  --chat-size-sm: 17px;
+  --chat-size-lg: 19px;
+  --chat-gap-y-sm: 20px;
+  --chat-gap-y-lg: 30px;
+  --chat-gap-x-sm: 20px;
+  --chat-gap-x-lg: 30px;
 }

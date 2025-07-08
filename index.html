@@ -25,19 +25,51 @@
           chatbot_start: '9:00', // Set time chatbot shoud show from
           chatbot_end: '18:00', // Set time chatbot shoud hide from
           
-          // chatbot_script: "var Tawk_API = Tawk_API || {}; Tawk_LoadStart = new Date(); (function() { var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0]; s1.async = true; s1.src = 'https://embed.tawk.to/5c498d5751410568a1081cd6/default'; s1.charset = 'UTF-8'; s1.setAttribute('crossorigin', '*'); s0.parentNode.insertBefore(s1, s0); })();"
-
         });
+          
+        setTimeout(() => {
 
-              // const scriptElement = document.createElement('script');
-              // scriptElement.setAttribute("type", "text/javascript");
-              // scriptElement.setAttribute("async", true);
-              // scriptElement.text = id.chatbot_script;
-              // document.body.appendChild(scriptElement);
-        
+          const chatEnabled = checkChatBot();
+          
+          if (chatEnabled === false) {
+            
+            var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+            (function() {
+              var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+              s1.async = true;
+              s1.src = 'https://embed.tawk.to/5c498d5751410568a1081cd6/default';
+              s1.charset = 'UTF-8';
+              s1.setAttribute('crossorigin', '*');
+              s0.parentNode.insertBefore(s1, s0);
+            })();
+            
+          } 
+
+        }, 1000);
+
+
       });
 
     </script>
+
+    <style>
+
+      .chatbot {
+        --chat-txt: #006875;
+        --chat-icon: #2e2e2e;
+        --chat-color: #ffffff;
+        --chat-size-sm: 17px;
+        --chat-size-lg: 19px;
+        --chat-size-sm: 17px;
+        --chat-gap-y-sm: 20px;
+        --chat-gap-y-lg: 30px;
+        --chat-gap-x-sm: 20px;
+        --chat-gap-x-lg: 30px;
+      }
+
+    </style>
 
   </head>
 

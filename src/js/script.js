@@ -173,16 +173,32 @@ setChatBot = function (id) {
 
 
         /*-----------------------------------------------------------------------------------*/
-        /* CHATBOT VISIBILITY */
+        /* CHATBOT VISIBILITY AND CREATE A GLOBAL FUNCTION */
         /*-----------------------------------------------------------------------------------*/
 
+        function checkChatBot() {
+          
+          const chatStatus = chatParent.getAttribute('data-chatbot');
+      
+          if (chatStatus === 'true') {
+            return true;
+          } else {
+            return false;
+          }
+
+        }
+        
+        window.checkChatBot = checkChatBot;
+
         setTimeout(() => {
+
+          chatParent.setAttribute('data-chatbot', true);
 
           /*-----------------------------------------------------------------------------------*/
           /* CHECK IF CHATBOT NEEDS TO SHOW BETWEEN A TIME FRAME */
           /*-----------------------------------------------------------------------------------*/
 
-          function scheduleChat(time) {
+          function scheduleChatBot(time) {
 
             const startParts = time.start.split(':');
             const endParts = time.end.split(':');
@@ -203,7 +219,7 @@ setChatBot = function (id) {
 
           if (id.chatbot_start) {
 
-            if (scheduleChat({ start: id.chatbot_start, end: id.chatbot_end })) {
+            if (scheduleChatBot({ start: id.chatbot_start, end: id.chatbot_end })) {
 
               chatParent.setAttribute('data-chatbot', true);
     
@@ -219,6 +235,7 @@ setChatBot = function (id) {
   
           }
 
+          
           /*-----------------------------------------------------------------------------------*/
           /* SHOW ONLOAD */
           /*-----------------------------------------------------------------------------------*/
@@ -283,7 +300,7 @@ setChatBot = function (id) {
           
           }
 
-        }, 1000)
+        }, 500)
 
       }
 
