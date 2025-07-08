@@ -35,7 +35,7 @@ function css() {
   .src(paths.styles.src)
   // .pipe(sourcemaps.init())
   .pipe(sass({style: 'compressed'}).on('error', sass.logError))
-  .pipe(concat('chatbot-styles.css'))
+  .pipe(concat('chatbot.min.css'))
   // .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest(paths.styles.dest))
 }
@@ -46,7 +46,7 @@ exports.css = css;
 function js() {
   return gulp
   .src(paths.scripts.src)
-  .pipe(concat('chatbot-script.js'))
+  .pipe(concat('chatbot.min.js'))
   .pipe(inject('./src/html/*.html'))
   .pipe(uglify())
   .pipe(gulp.dest(paths.scripts.dest))
