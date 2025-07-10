@@ -45,12 +45,12 @@ loadChatBot();
 /*-----------------------------------------------------------------------------------*/
 
 let setChatBot;
-let timeout = 100;
+let timeoutChatBot = 100;
 
 setChatBot = function (id) {
 
   setTimeout(function () {
-    timeout--;
+    timeoutChatBot--;
     if ( typeof loadChatBot !== 'undefined' ) {
 
       const chatToggle   =   document.querySelector('#chatToggle');
@@ -322,7 +322,7 @@ setChatBot = function (id) {
 
       }
 
-    } else if (timeout > 0) {
+    } else if (timeoutChatBot > 0) {
       setChatBot();
     } else {
       console.log('No chatEmbed Script Loaded')
