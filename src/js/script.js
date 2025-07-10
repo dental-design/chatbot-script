@@ -6,8 +6,8 @@ const loadChatBot = function () {
 
   const addStyles = document.createElement('link');
   addStyles.rel = 'stylesheet';
-  addStyles.href = './dist/chatbot.min.css';
-  // addStyles.href = 'https://cdn.jsdelivr.net/gh/dental-design/chatbot-script/dist/chatbot.min.css';
+  // addStyles.href = './dist/chatbot.min.css';
+  addStyles.href = 'https://cdn.jsdelivr.net/gh/dental-design/chatbot-script/dist/chatbot.min.css';
   document.head.appendChild(addStyles);
 
   const addDialog = document.createElement("div");
