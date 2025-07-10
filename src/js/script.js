@@ -2,21 +2,39 @@
 /* LOAD THE CHATBOT BUTTON & DIALOG */
 /*-----------------------------------------------------------------------------------*/
 
-const loadChatBot = function () {
+// const loadChatBot = function () {
 
-  const addStyles = document.createElement('link');
-  addStyles.rel = 'stylesheet';
-  // addStyles.href = './dist/chatbot.min.css';
-  addStyles.href = 'https://cdn.jsdelivr.net/gh/dental-design/chatbot-script/dist/chatbot.min.css';
-  document.head.appendChild(addStyles);
+//   const addStyles = document.createElement('link');
+//   addStyles.rel = 'stylesheet';
+
+//   addStyles.href = './dist/chatbot.min.css';
+//   addStyles.href = 'https://cdn.jsdelivr.net/gh/dental-design/chatbot-script/dist/chatbot.min.css';
+
+//   document.head.appendChild(addStyles);
+
+//   const addDialog = document.createElement("div");
+//   addDialog.id = ('chatBot');
+//   addDialog.innerHTML = "{{load path='./src/html/dialog.html'}}"; //injected with gulp
+//   addDialog.className = ('chatbot');
+//   addDialog.setAttribute('data-chatbot', false);
+//   document.body.prepend(addDialog);
+
+// }
+
+// loadChatBot();
+
+const loadChatBot = function () {
+  const inlineStyles = "{{load path='./dist/chatbot.min.css'}}"; //injected with gulp
+  const styleElement = document.createElement('style');
+  styleElement.innerHTML = inlineStyles;
+  document.head.appendChild(styleElement);
 
   const addDialog = document.createElement("div");
-  addDialog.id = ('chatBot');
+  addDialog.id = 'chatBot';
   addDialog.innerHTML = "{{load path='./src/html/dialog.html'}}"; //injected with gulp
-  addDialog.className = ('chatbot');
+  addDialog.className = 'chatbot';
   addDialog.setAttribute('data-chatbot', false);
   document.body.prepend(addDialog);
-
 }
 
 loadChatBot();
