@@ -1,8 +1,5 @@
 // npm init -y
-// npm install gulp sass node-sass gulp-sass gulp-sourcemaps gulp-concat gulp-uglify --save-dev
-// npm install gulp sass node-sass gulp-sass gulp-sourcemaps gulp-concat gulp-uglify gulp-multi-dest gulp-inject-views --save-dev
-// npm install gulp-inject-views --save-dev
-
+// npm install gulp sass node-sass gulp-sass gulp-concat gulp-uglify gulp-inject-views --save-dev
 
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
@@ -10,38 +7,29 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const inject = require('gulp-inject-views');
 
-
 const paths = {
 
   styles: {
-
     src: './src/scss/**/*.scss',
     dest: './src/css/',
-
   },
 
   scripts: {
-
     src: './src/js/*.js',
     dest: './dist/',
-    
   }
 
 };
 
-	
 function css() {
   return gulp
   .src(paths.styles.src)
-  // .pipe(sourcemaps.init())
   .pipe(sass({style: 'compressed'}).on('error', sass.logError))
   .pipe(concat('chatbot.min.css'))
-  // .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest(paths.styles.dest))
 }
 
 exports.css = css;
-
 
 function js() {
   return gulp
@@ -55,10 +43,9 @@ function js() {
 
 exports.js = js;
 
-
 function watch() {
   gulp.watch(paths.styles.src, css);
   gulp.watch(paths.scripts.src, js);
 }
 
-exports.watch = watch;
+exports.watch = watch; //CLI use "gulp watch"
