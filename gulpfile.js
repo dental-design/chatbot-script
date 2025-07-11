@@ -16,7 +16,7 @@ const paths = {
   styles: {
 
     src: './src/scss/**/*.scss',
-    dest: './dist/',
+    dest: './src/css/',
 
   },
 
@@ -48,6 +48,7 @@ function js() {
   .src(paths.scripts.src)
   .pipe(concat('chatbot.min.js'))
   .pipe(inject('./src/html/*.html'))
+  .pipe(inject('./src/css/*.css'))
   .pipe(uglify())
   .pipe(gulp.dest(paths.scripts.dest))
 }

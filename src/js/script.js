@@ -24,7 +24,7 @@
 // loadChatBot();
 
 const loadChatBot = function () {
-  const inlineStyles = "{{load path='./dist/chatbot.min.css'}}"; //injected with gulp
+  const inlineStyles = "{{load path='./src/html/chatbot.min.css'}}"; //injected with gulp
   const styleElement = document.createElement('style');
   styleElement.innerHTML = inlineStyles;
   document.head.appendChild(styleElement);
