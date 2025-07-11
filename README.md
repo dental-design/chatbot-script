@@ -1,5 +1,5 @@
 # Chatbot script - Non Production Version
 
-## Implementation demo:
+## Usage demo:
 
 https://dev.dental-design-clients.co.uk/dental-design/chatbot/
