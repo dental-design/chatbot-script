@@ -35,8 +35,7 @@ function js() {
   return gulp
   .src(paths.scripts.src)
   .pipe(concat('chatbot.min.js'))
-  .pipe(inject('./src/html/*.html'))
-  .pipe(inject('./src/css/*.css'))
+  .pipe(inject())
   .pipe(uglify())
   .pipe(gulp.dest(paths.scripts.dest))
 }
